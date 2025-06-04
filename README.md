@@ -1,54 +1,66 @@
-# React + TypeScript + Vite
+# Todo App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Это простое ToDo-приложение, созданное с использованием React, TypeScript и Styled Components. Оно позволяет пользователям эффективно управлять своими повседневными задачами. Проект был создан с использованием Vite.
 
-Currently, two official plugins are available:
+## Функциональность
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   **Добавление новых задач:** Поле ввода для добавления новых задач.
+*   **Списки задач:**
+    *   Все задачи: Отображает все задачи.
+    *   Активные задачи: Отображает только незавершенные задачи.
+    *   Завершенные задачи: Отображает только завершенные задачи.
+*   **Количество оставшихся задач:** Показывает количество активных (незавершенных) задач.
+*   **Очистка завершенных:** Кнопка для удаления всех завершенных задач.
+*   **Сохранение данных:** Задачи сохраняются в Local Storage для сохранения между сессиями.
 
-## Expanding the ESLint configuration
+## Используемые технологии
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+*   React
+*   TypeScript
+*   Styled Components
+*   Local Storage API
+*   Vite
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Структура проекта
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Структура директорий:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+mindbox/
+  src/
+    components/:
+      TodoFooter.tsx: Отображает статистику задач, параметры фильтрации и кнопку очистки завершенных задач.
+      TodoInput.tsx: Предоставляет поле ввода для добавления новых задач.
+      TodoItem.tsx: Отображает отдельную задачу с текстом и флажком завершения.
+      TodoList.tsx: Отображает список задач, рендерит TodoItem.
+    App.tsx: Главный компонент, управляющий состоянием и рендерингом других компонентов.
+    index.tsx
+    ...
+README.md
+package.json
+...
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Запуск проекта
+
+1.  Клонируйте репозиторий.
+2.  Установите зависимости: `npm install` или `yarn install`.
+3.  Запустите проект: `npm run dev` или `yarn dev`.
+4. Откройте адрес, указанный в консоли, в вашем браузере (обычно http://localhost:3000 или http://localhost:5173).
+
+## Тесты
+
+Ключевая функциональность покрыта тестами. Тесты находятся в файле `TodoInput.test.tsx`.
+
+**Список тестов:**
+
+1.  Рендеринг с плейсхолдером: Проверка, что input рендерится с правильным плейсхолдером.
+2.  Ввод текста: Проверка вызова `onChange` при вводе текста.
+3.  Лимит ввода: Проверка ограничения ввода до 250 символов.
+4.  Нажатие Enter: Проверка вызова `onAdd` при нажатии Enter.
+5.  Клик на wrapper: Проверка вызова `onAdd` при клике на `InputWrapper`.
+6.  Фокус на input: Проверка изменения состояния при фокусе на input.
+7.  Снятие фокуса с input: Проверка изменения состояния при снятии фокуса с input.
+8.  Отображение значения из props: Проверка отображения значения, переданного через `value` prop.
+9.  Вызов onAdd только при непустом значении: Проверка, что `onAdd` вызывается только если `value` не пустая строка.
+10. Очистка input после добавления задачи: Убедиться, что после вызова `onAdd` (при нажатии Enter или клике), значение input очищается (становится пустой строкой).
+
+Чтобы запустить тесты, выполните команду `npm test` или `yarn test` или `pnpm test`.
